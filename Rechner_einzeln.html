@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Kurspreisrechner</title>
+
+    <style>
+        html {
+            font-family: 'Open Sans', sans-serif;
+        }
+        table {
+            border: 1px solid;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            width: 25%;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: yellow;
+            color: black;
+            font-size: 16px;
+        }
+
+        tr:hover {
+            font-weight: bold;
+        }
+
+        #inputNumber {
+            width: 20%;
+            border: 1px solid lightgrey;
+            font-size: 20px;
+        }
+
+    </style>
+
+    <script>
+        function showNumber() {
+            var inputElement = document.getElementById("inputNumber");
+            var inputValue = parseInt(inputElement.value); // Parse input value as an integer
+
+            var result = calculatePrice(inputValue).toFixed(2);
+            var preisGesamt = (result*inputValue).toFixed(2);
+            var monate = Math.ceil(inputValue/4);
+            var monatsRate = (preisGesamt/monate).toFixed(2);
+            var ersparnisGesamt = ((37.46*inputValue)-preisGesamt).toFixed(2);
+
+            if (isNaN(inputValue)) {
+
+                document.getElementById("outputNumber").textContent = "";
+                document.getElementById("ganzerPreis").textContent = "";
+                document.getElementById("anzahlMonate").textContent = "";
+                document.getElementById("monatsRate").textContent = "";
+                document.getElementById("ersparnisGesamt").textContent = "";
+
+            } else {
+
+            // Update the content of the outputNumber div with the entered value
+                document.getElementById("outputNumber").textContent = result + " €";
+                document.getElementById("ganzerPreis").textContent = preisGesamt + " €";
+                document.getElementById("anzahlMonate").textContent = monate + " Monate";
+                document.getElementById("monatsRate").textContent = monatsRate + " €";
+                document.getElementById("ersparnisGesamt").textContent = ersparnisGesamt + " €";
+            }
+        }
+
+        function calculatePrice(inputValue) {
+            var limit1 = 30;
+            var limit2 = 38;
+            var factor = -0.07;
+
+            var result;
+
+            result = limit1-(limit1-limit2)*Math.pow(Math.E, factor*inputValue);
+
+            // Calculate the result using the formula
+            return result;
+        }
+
+</script>
+
+</head>
+
+<body>
+    <table>
+        <tr>
+            <th>Anzahl Kurse</th>
+            <th>10 Kurse</th>
+            <th>20 Kurse</th>
+            <th><input id="inputNumber" type="number" placeholder="X" oninput="showNumber()"> Kurse</th>
+        </tr>
+        <tr>
+            <td>Preis pro Kurs</td>
+            <td>33,97 €</td>
+            <td>31,97 €</td>
+            <td><div id="outputNumber"></div></td>
+        </tr>
+        <tr>
+            <td>Preis gesamt</td>
+            <td>339,73 €</td>
+            <td>639,46 €</td>
+            <td><div id="ganzerPreis"></div></td>
+        </tr>
+        <tr>
+            <td>Anzahl Monate</td>
+            <td>3 Monate</td>
+            <td>5 Monate</td>
+            <td><div id="anzahlMonate"></div></td>
+        </tr>
+        <tr>
+            <td>Monatsrate</td>
+            <td>113,24 €</td>
+            <td>127,89 €</td>
+            <td><div id="monatsRate"></div></td>
+        </tr>
+        <tr>
+            <td>Ersparnis gegenüber einzelnen Kursen</td>
+            <td>34,90 €</td>
+            <td>109,80 €</td>
+            <td><div id="ersparnisGesamt"></div></td>
+        </tr>
+    </table> 
+</body>
+
+</html>
