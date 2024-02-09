@@ -21,6 +21,7 @@ th {
 
 tr:hover {
     font-weight: bold;
+    background-color: white;
 }
 
 #inputNumber {
