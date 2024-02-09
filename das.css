@@ -16,8 +16,9 @@ th, td {
 
 th {
     background-color: #f9b206;
-    color: black;
-    font-size: 16px;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 tr:hover {
