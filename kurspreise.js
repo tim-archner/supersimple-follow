@@ -3,11 +3,11 @@
     var inputElement = document.getElementById("inputNumber");
     var inputValue = parseInt(inputElement.value); // Parse input value as an integer
 
-    var result = calculatePrice(inputValue).toFixed(2);
-    var preisGesamt = (result*inputValue).toFixed(2);
+    var result = Math.round(calculatePrice(inputValue)*100)/100;
+    var preisGesamt = Math.round((result*inputValue)*100)/100;
     var monate = Math.ceil(inputValue/4);
-    var monatsRate = (preisGesamt/monate).toFixed(2);
-    var ersparnisGesamt = ((37.46*inputValue)-preisGesamt).toFixed(2);
+    var monatsRate = Math.round((preisGesamt/monate)*100)/100;
+    var ersparnisGesamt = Math.round(((37.46*inputValue)-preisGesamt)*100)/100;
 
     if (isNaN(inputValue)) {
 
